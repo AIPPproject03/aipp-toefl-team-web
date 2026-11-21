@@ -193,13 +193,33 @@ export const PRACTICE_PACKS: PracticePack[] = getPracticePacks();
 export function getPackQuestions(
   packId: string,
   recentIds: string[] = [],
-  limit = 12
+  limit = 12,
+  difficulty?: DifficultyLevel,
+  searchQuery?: string
 ): { pack: PracticePack; questions: AnyQuestion[] } | null {
   const pack = getPracticePacks().find((p) => p.id === packId);
   if (!pack) return null;
-  const pool = getActiveQuestions().filter(
-    (q) => q.section === pack.section && pack.taskTypes.includes(q.taskType)
-  );
+  const qLower = searchQuery?.trim().toLowerCase() || '';
+  const pool = getActiveQuestions().filter((q) => {
+    if (q.section !== pack.section || !pack.taskTypes.includes(q.taskType)) return false;
+    if (difficulty && q.difficulty !== difficulty) return false;
+    if (qLower) {
+      const title =
+        'passageTitle' in q
+          ? q.passageTitle
+          : 'title' in q
+            ? q.title
+            : 'topicTitle' in q
+              ? q.topicTitle
+              : 'courseName' in q
+                ? q.courseName
+                : '';
+      const hay =
+        `${title} ${q.topic} ${q.skillFocus} ${q.taskType} ${q.taskType.replace(/-/g, ' ')} ${q.difficulty} ${q.cefr} ${q.learningObjective} ${q.keywords.join(' ')}`.toLowerCase();
+      if (!hay.includes(qLower)) return false;
+    }
+    return true;
+  });
   const prioritized = shuffleWithPriority(pool, recentIds, Date.now());
   return { pack, questions: prioritized.slice(0, Math.min(limit, prioritized.length)) };
 }
@@ -376,8 +396,8 @@ export function adaptReadingStage2(
     tier === 'Upper-Adaptive'
       ? ['Advanced', 'Expert']
       : tier === 'Standard'
-      ? ['Intermediate', 'Advanced']
-      : ['Beginner', 'Intermediate'];
+        ? ['Intermediate', 'Advanced']
+        : ['Beginner', 'Intermediate'];
 
   const usedSet = new Set(alreadySelectedIds);
   const pool = getActiveQuestionsBySection<ReadingQuestion>('reading').filter(
@@ -500,8 +520,8 @@ export function adaptListeningStage2(
     tier === 'Upper-Adaptive'
       ? ['Advanced', 'Expert']
       : tier === 'Standard'
-      ? ['Intermediate', 'Advanced']
-      : ['Beginner', 'Intermediate'];
+        ? ['Intermediate', 'Advanced']
+        : ['Beginner', 'Intermediate'];
 
   const usedSet = new Set(alreadySelectedIds);
   const pool = shuffleWithPriority(

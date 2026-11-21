@@ -86,32 +86,32 @@ const GENERATOR_MODE_GROUPS: Array<{
   group: string;
   modes: Array<{ id: TestGeneratorMode; label: string; shortDesc: string }>;
 }> = [
-  {
-    group: 'Full 4-Section Simulations',
-    modes: [
-      { id: 'adaptive-full', label: 'Adaptive Full Test', shortDesc: 'Stage 1 → 2 Reading & Listening' },
-      { id: 'standard-full', label: 'Standard Full Test', shortDesc: 'Balanced ~120-item 2026 blueprint' },
-      { id: 'random-full', label: 'Random Full Test', shortDesc: 'Randomized topics, avoids repeats' },
-    ],
-  },
-  {
-    group: 'Single-Section Simulations',
-    modes: [
-      { id: 'reading-only', label: 'Reading Only', shortDesc: 'Words · Daily Life · Academic' },
-      { id: 'listening-only', label: 'Listening Only', shortDesc: 'Responses · Dialogues · Talks' },
-      { id: 'writing-only', label: 'Writing Only', shortDesc: 'Sentence · Email · Discussion' },
-      { id: 'speaking-only', label: 'Speaking Only', shortDesc: 'Repeat · 45s Interview' },
-    ],
-  },
-  {
-    group: 'Targeted & Custom Drills',
-    modes: [
-      { id: 'weakness-based', label: 'Weakness-Based', shortDesc: 'Auto-targets lowest-accuracy tasks' },
-      { id: 'mistake-review', label: 'Mistake Review', shortDesc: 'Retries your missed items' },
-      { id: 'custom', label: 'Custom Practice', shortDesc: 'Filter section, task, level & topic' },
-    ],
-  },
-];
+    {
+      group: 'Full 4-Section Simulations',
+      modes: [
+        { id: 'adaptive-full', label: 'Adaptive Full Test', shortDesc: 'Stage 1 → 2 Reading & Listening' },
+        { id: 'standard-full', label: 'Standard Full Test', shortDesc: 'Balanced ~120-item 2026 blueprint' },
+        { id: 'random-full', label: 'Random Full Test', shortDesc: 'Randomized topics, avoids repeats' },
+      ],
+    },
+    {
+      group: 'Single-Section Simulations',
+      modes: [
+        { id: 'reading-only', label: 'Reading Only', shortDesc: 'Words · Daily Life · Academic' },
+        { id: 'listening-only', label: 'Listening Only', shortDesc: 'Responses · Dialogues · Talks' },
+        { id: 'writing-only', label: 'Writing Only', shortDesc: 'Sentence · Email · Discussion' },
+        { id: 'speaking-only', label: 'Speaking Only', shortDesc: 'Repeat · 45s Interview' },
+      ],
+    },
+    {
+      group: 'Targeted & Custom Drills',
+      modes: [
+        { id: 'weakness-based', label: 'Weakness-Based', shortDesc: 'Auto-targets lowest-accuracy tasks' },
+        { id: 'mistake-review', label: 'Mistake Review', shortDesc: 'Retries your missed items' },
+        { id: 'custom', label: 'Custom Practice', shortDesc: 'Filter section, task, level & topic' },
+      ],
+    },
+  ];
 
 const ALL_GENERATOR_MODES: TestGeneratorMode[] = [
   'standard-full',
@@ -181,6 +181,15 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
   const initialSectionParam = searchParams.get('section') as SectionType | null;
   const initialModeParam = searchParams.get('mode') as TestGeneratorMode | null;
   const packParam = searchParams.get('pack');
+  const difficultyQueryRaw = searchParams.get('difficulty');
+  const packDifficultyParam: DifficultyLevel | undefined =
+    difficultyQueryRaw === 'Beginner' ||
+      difficultyQueryRaw === 'Intermediate' ||
+      difficultyQueryRaw === 'Advanced' ||
+      difficultyQueryRaw === 'Expert'
+      ? difficultyQueryRaw
+      : undefined;
+  const packSearchParam = searchParams.get('q') || undefined;
   const resumeRequested = searchParams.get('resume') === '1';
 
   const resolveInitialGeneratorMode = (): TestGeneratorMode => {
@@ -217,8 +226,8 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
     !isFullGeneratorMode || packParam
       ? 'practice'
       : state.profile.strictModeDefault
-      ? 'strict'
-      : 'practice'
+        ? 'strict'
+        : 'practice'
   );
   const [activeSessionTitle, setActiveSessionTitle] = useState<string | null>(null);
   const [adaptiveEnabled, setAdaptiveEnabled] = useState<boolean>(true);
@@ -308,11 +317,24 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
       return;
     }
     if (packParam) {
-      const packData = getPackQuestions(packParam, state.recentQuestionIds, 12);
+      const packData = getPackQuestions(
+        packParam,
+        state.recentQuestionIds,
+        12,
+        packDifficultyParam,
+        packSearchParam
+      );
       if (packData && packData.questions.length > 0) {
         const sec = packData.pack.section;
         setMode('practice');
-        setActiveSessionTitle(`Focused Pack · ${packData.pack.title}`);
+        const filterTag = [packDifficultyParam, packSearchParam ? `"${packSearchParam}"` : null]
+          .filter(Boolean)
+          .join(' · ');
+        setActiveSessionTitle(
+          filterTag
+            ? `Focused Pack · ${packData.pack.title} (${filterTag})`
+            : `Focused Pack · ${packData.pack.title}`
+        );
         setAdaptiveEnabled(false);
         setSections([sec]);
         const packSecDur = Math.max(5, packData.pack.estimatedMinutes) * 60;
@@ -345,7 +367,7 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resumeRequested, packParam]);
+  }, [resumeRequested, packParam, packDifficultyParam, packSearchParam]);
 
   const currentSection = sections[currentSectionIndex] || 'reading';
   const currentSectionQIds = questionIdsBySection[currentSection] || [];
@@ -875,22 +897,20 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
               <button
                 type="button"
                 onClick={() => setLengthPreset('full-2026')}
-                className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap ${
-                  lengthPreset === 'full-2026'
+                className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap ${lengthPreset === 'full-2026'
                     ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-300'
-                }`}
+                  }`}
               >
                 Full 2026 (~120 Items)
               </button>
               <button
                 type="button"
                 onClick={() => setLengthPreset('express')}
-                className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap ${
-                  lengthPreset === 'express'
+                className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap ${lengthPreset === 'express'
                     ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-300'
-                }`}
+                  }`}
               >
                 Express Drill
               </button>
@@ -972,11 +992,10 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
                                 setMode('practice');
                               }
                             }}
-                            className={`p-3 rounded-xl border text-left transition-colors ${
-                              active
+                            className={`p-3 rounded-xl border text-left transition-colors ${active
                                 ? 'border-[#1D4ED8] bg-blue-50/70 dark:bg-blue-600/15'
                                 : 'border-slate-200 dark:border-slate-800 hover:border-blue-400'
-                            }`}
+                              }`}
                           >
                             <div className="font-display text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
                               {m.label}
@@ -1016,11 +1035,10 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
                           key={sec}
                           type="button"
                           onClick={() => toggleCustomSection(sec)}
-                          className={`min-h-[36px] px-3.5 rounded-lg border text-xs font-semibold capitalize transition-colors ${
-                            on
+                          className={`min-h-[36px] px-3.5 rounded-lg border text-xs font-semibold capitalize transition-colors ${on
                               ? 'border-[#1D4ED8] bg-[#1D4ED8] text-white'
                               : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-blue-400'
-                          }`}
+                            }`}
                         >
                           {sec}
                         </button>
@@ -1055,11 +1073,10 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
                           key={t.value}
                           type="button"
                           onClick={() => toggleCustomTask(t.value)}
-                          className={`px-2.5 py-1.5 rounded-lg border text-[11px] font-medium transition-colors ${
-                            on
+                          className={`px-2.5 py-1.5 rounded-lg border text-[11px] font-medium transition-colors ${on
                               ? 'border-[#1D4ED8] bg-blue-50 dark:bg-blue-600/20 text-[#1D4ED8] dark:text-cyan-300'
                               : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
-                          }`}
+                            }`}
                         >
                           {t.label}
                         </button>
@@ -1082,11 +1099,10 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
                             key={diff}
                             type="button"
                             onClick={() => toggleCustomDifficulty(diff)}
-                            className={`px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
-                              on
+                            className={`px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-colors ${on
                                 ? 'border-[#1D4ED8] bg-blue-50 dark:bg-blue-600/20 text-[#1D4ED8] dark:text-cyan-300'
                                 : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
-                            }`}
+                              }`}
                           >
                             {diff}
                           </button>
@@ -1219,11 +1235,10 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
                 <button
                   type="button"
                   onClick={() => setMode('strict')}
-                  className={`p-4 rounded-xl border text-left transition-colors ${
-                    mode === 'strict'
+                  className={`p-4 rounded-xl border text-left transition-colors ${mode === 'strict'
                       ? 'border-[#1D4ED8] bg-blue-50/60 dark:bg-blue-600/15'
                       : 'border-slate-200 dark:border-slate-800 hover:border-blue-400'
-                  }`}
+                    }`}
                 >
                   <div className="font-display text-sm font-bold text-slate-900 dark:text-white">
                     Strict Exam Mode
@@ -1236,11 +1251,10 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
                 <button
                   type="button"
                   onClick={() => setMode('practice')}
-                  className={`p-4 rounded-xl border text-left transition-colors ${
-                    mode === 'practice'
+                  className={`p-4 rounded-xl border text-left transition-colors ${mode === 'practice'
                       ? 'border-[#1D4ED8] bg-blue-50/60 dark:bg-blue-600/15'
                       : 'border-slate-200 dark:border-slate-800 hover:border-blue-400'
-                  }`}
+                    }`}
                 >
                   <div className="font-display text-sm font-bold text-slate-900 dark:text-white">
                     Guided Practice Mode
@@ -1427,13 +1441,12 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
               return (
                 <div
                   key={label}
-                  className={`flex items-center gap-3 rounded-lg border px-3.5 py-2.5 text-xs transition-colors ${
-                    done
+                  className={`flex items-center gap-3 rounded-lg border px-3.5 py-2.5 text-xs transition-colors ${done
                       ? 'border-emerald-200 dark:border-emerald-800/70 bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200'
                       : active
-                      ? 'border-blue-300 dark:border-blue-700 bg-blue-50/60 dark:bg-blue-950/30 text-slate-900 dark:text-white font-medium'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500'
-                  }`}
+                        ? 'border-blue-300 dark:border-blue-700 bg-blue-50/60 dark:bg-blue-950/30 text-slate-900 dark:text-white font-medium'
+                        : 'border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500'
+                    }`}
                 >
                   {done ? (
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
@@ -1540,11 +1553,10 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
                 return (
                   <div
                     key={row.key}
-                    className={`rounded-xl border p-4 space-y-2.5 ${
-                      included
+                    className={`rounded-xl border p-4 space-y-2.5 ${included
                         ? 'bg-white/[0.06] border-white/12'
                         : 'bg-white/[0.02] border-white/[0.06] opacity-65'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-semibold text-white">
@@ -1671,9 +1683,8 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
           <div className="text-[11px] text-cyan-300 font-medium truncate">
             {activeSessionTitle
               ? `${activeSessionTitle} · Section ${currentSectionIndex + 1} of ${sections.length}`
-              : `${mode === 'strict' ? 'Strict Exam Mode' : 'Guided Practice Mode'} · Section ${
-                  currentSectionIndex + 1
-                } of ${sections.length}`}
+              : `${mode === 'strict' ? 'Strict Exam Mode' : 'Guided Practice Mode'} · Section ${currentSectionIndex + 1
+              } of ${sections.length}`}
           </div>
           <div className="font-display text-sm sm:text-base font-bold truncate">
             {SECTION_META[currentSection].label} — Question {currentQuestionIndex + 1} of{' '}
@@ -1684,11 +1695,10 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
         <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0">
           {/* Clean Tabular Countdown Timer (Zero distracting pulse/flash) */}
           <div
-            className={`inline-flex items-center gap-1.5 min-h-[40px] px-3.5 rounded-lg font-mono text-sm font-bold tabular-nums ${
-              timerUrgent
+            className={`inline-flex items-center gap-1.5 min-h-[40px] px-3.5 rounded-lg font-mono text-sm font-bold tabular-nums ${timerUrgent
                 ? 'bg-rose-600/25 border border-rose-400/80 text-rose-200'
                 : 'bg-white/10 text-white'
-            }`}
+              }`}
           >
             <Clock className="w-4 h-4 shrink-0" />
             <span>{formatClock(sectionTimeLeft)}</span>
@@ -1743,13 +1753,12 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
                     checkAdaptiveRouting(idx);
                     setCurrentQuestionIndex(idx);
                   }}
-                  className={`min-w-[36px] min-h-[36px] rounded-lg font-mono text-xs font-semibold tabular-nums shrink-0 transition-colors ${
-                    isCurrent
+                  className={`min-w-[36px] min-h-[36px] rounded-lg font-mono text-xs font-semibold tabular-nums shrink-0 transition-colors ${isCurrent
                       ? 'bg-[#1D4ED8] text-white'
                       : answered
-                      ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
-                      : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
-                  } ${isBookmarked ? 'ring-2 ring-amber-400' : ''}`}
+                        ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
+                        : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
+                    } ${isBookmarked ? 'ring-2 ring-amber-400' : ''}`}
                 >
                   {idx + 1}
                 </button>
@@ -1761,8 +1770,8 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
             {currentSection === 'reading'
               ? `Tier: ${readingTier}`
               : currentSection === 'listening'
-              ? `Tier: ${listeningTier}`
-              : '2026 Rubric Engine'}
+                ? `Tier: ${listeningTier}`
+                : '2026 Rubric Engine'}
           </span>
         </div>
       </div>
@@ -1891,8 +1900,8 @@ export const ExamSimulationPage: React.FC<ExamSimulationPageProps> = ({ defaultS
             {currentQuestionIndex + 1 < currentSectionQIds.length
               ? 'Next Question'
               : currentSectionIndex + 1 < sections.length
-              ? `Finish ${SECTION_META[currentSection].label}`
-              : 'Submit & Score'}
+                ? `Finish ${SECTION_META[currentSection].label}`
+                : 'Submit & Score'}
           </span>
           <ArrowRight className="w-4 h-4" />
         </button>
