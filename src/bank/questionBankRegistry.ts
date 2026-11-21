@@ -71,10 +71,10 @@ function buildBuiltinPacks(): InstalledQuestionPack[] {
       (v.cefr === 'C2'
         ? 'Expert'
         : v.cefr === 'C1'
-        ? 'Advanced'
-        : v.cefr === 'B1' || v.cefr === 'A2'
-        ? 'Beginner'
-        : 'Intermediate'),
+          ? 'Advanced'
+          : v.cefr === 'B1' || v.cefr === 'A2'
+            ? 'Beginner'
+            : 'Intermediate'),
     packId: 'aipp-core-2026',
   }));
 
@@ -292,10 +292,10 @@ export function getDetailedBankStats(): DetailedBankStats {
       (v.cefr === 'C2'
         ? 'Expert'
         : v.cefr === 'C1'
-        ? 'Advanced'
-        : v.cefr === 'B1' || v.cefr === 'A2'
-        ? 'Beginner'
-        : 'Intermediate');
+          ? 'Advanced'
+          : v.cefr === 'B1' || v.cefr === 'A2'
+            ? 'Beginner'
+            : 'Intermediate');
     vocabByDifficulty[diff] += 1;
   });
 
@@ -416,4 +416,44 @@ export function exportActiveBankAsJson(): QuestionPackFile {
     questions: getActiveQuestions(),
     vocabulary: getActiveVocabulary(),
   };
+}
+
+export function getBackupPacksPayload(): {
+  importedPacks: InstalledQuestionPack[];
+  disabledPackIds: string[];
+} {
+  return {
+    importedPacks: importedPacksCache,
+    disabledPackIds: [...disabledPackIdsCache],
+  };
+}
+
+export function restoreBackupPacksPayload(payload: {
+  importedPacks?: unknown;
+  disabledPackIds?: unknown;
+}): void {
+  let changed = false;
+  if (Array.isArray(payload.importedPacks)) {
+    const validPacks = payload.importedPacks.filter(
+      (p): p is InstalledQuestionPack =>
+        Boolean(
+          p &&
+          typeof p === 'object' &&
+          'manifest' in p &&
+          Array.isArray((p as InstalledQuestionPack).questions) &&
+          Array.isArray((p as InstalledQuestionPack).vocabulary)
+        )
+    );
+    const saved = saveImportedPacks(validPacks);
+    if (saved.ok) {
+      importedPacksCache = validPacks;
+      changed = true;
+    }
+  }
+  if (Array.isArray(payload.disabledPackIds)) {
+    disabledPackIdsCache = new Set(payload.disabledPackIds.map(String));
+    saveDisabledIds(disabledPackIdsCache);
+    changed = true;
+  }
+  if (changed) notifyListeners();
 }

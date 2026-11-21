@@ -6,7 +6,10 @@ import {
   generateStudyPlan,
 } from '../data/achievements';
 import { computeSM2Review } from '../data/vocabularyBank';
-import { subscribeBankChanges } from '../bank/questionBankRegistry';
+import {
+  restoreBackupPacksPayload,
+  subscribeBankChanges,
+} from '../bank/questionBankRegistry';
 import {
   AppState,
   SavedExamDraft,
@@ -102,19 +105,19 @@ function loadState(): AppState {
     const fallback = createInitialState();
     const migratedStudyPlan = parsed.studyPlan
       ? {
-          ...parsed.studyPlan,
-          tasks: parsed.studyPlan.tasks.map((t) =>
-            t.route === '/ai-tutor'
-              ? {
-                  ...t,
-                  title: 'Weekly Mistake Review & Study Guide Check',
-                  description:
-                    'Review missed grammar & writing patterns in the Study Guide and set next week’s focus.',
-                  route: '/study-guide',
-                }
-              : t
-          ),
-        }
+        ...parsed.studyPlan,
+        tasks: parsed.studyPlan.tasks.map((t) =>
+          t.route === '/ai-tutor'
+            ? {
+              ...t,
+              title: 'Weekly Mistake Review & Study Guide Check',
+              description:
+                'Review missed grammar & writing patterns in the Study Guide and set next week’s focus.',
+              route: '/study-guide',
+            }
+            : t
+        ),
+      }
       : fallback.studyPlan;
     return {
       ...fallback,
@@ -123,8 +126,8 @@ function loadState(): AppState {
         typeof parsed.guideDrillsCompleted === 'number'
           ? parsed.guideDrillsCompleted
           : typeof parsed.aiTutorMessagesCount === 'number'
-          ? parsed.aiTutorMessagesCount
-          : fallback.guideDrillsCompleted,
+            ? parsed.aiTutorMessagesCount
+            : fallback.guideDrillsCompleted,
       profile: { ...fallback.profile, ...(parsed.profile || {}) },
       studyPlan: migratedStudyPlan,
       weeklyActivity:
@@ -162,6 +165,9 @@ interface AppContextValue {
   toggleStudyTask: (taskId: string) => void;
   completeDailyChallenge: (bonusXp?: number) => void;
   completeGuideDrill: (bonusXp?: number) => void;
+  importAppStateBackup: (
+    rawJsonText: string
+  ) => { ok: boolean; error?: string; summary?: string };
   resetAllProgress: () => void;
   getMetricValue: (metricKey: string) => number;
 }
@@ -460,6 +466,102 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   };
 
+  const importAppStateBackup = (
+    rawJsonText: string
+  ): { ok: boolean; error?: string; summary?: string } => {
+    try {
+      const parsed = JSON.parse(rawJsonText) as Record<string, unknown>;
+      if (!parsed || typeof parsed !== 'object') {
+        return { ok: false, error: 'Backup file must be a valid JSON object.' };
+      }
+
+      // Support both wrapped backup envelope { backupVersion, appState, importedPacks } and raw AppState JSON
+      const candidateState = (
+        parsed.appState && typeof parsed.appState === 'object' ? parsed.appState : parsed
+      ) as Partial<AppState> & { aiTutorMessagesCount?: number };
+
+      if (
+        !candidateState.profile ||
+        typeof candidateState.profile !== 'object' ||
+        !Array.isArray(candidateState.attempts)
+      ) {
+        return {
+          ok: false,
+          error:
+            'This JSON file is not a valid AIPP TOEFL TEAM Study Backup. (To add new questions, use Question Bank & Packs instead.)',
+        };
+      }
+
+      const fallback = createInitialState();
+      const restored: AppState = {
+        ...fallback,
+        ...candidateState,
+        profile: {
+          ...fallback.profile,
+          ...candidateState.profile,
+        },
+        attempts: candidateState.attempts,
+        draftExam: candidateState.draftExam ?? null,
+        recentQuestionIds: Array.isArray(candidateState.recentQuestionIds)
+          ? candidateState.recentQuestionIds.map(String).slice(-450)
+          : [],
+        vocabProgress:
+          candidateState.vocabProgress && typeof candidateState.vocabProgress === 'object'
+            ? candidateState.vocabProgress
+            : {},
+        studyPlan:
+          candidateState.studyPlan && Array.isArray(candidateState.studyPlan.tasks)
+            ? candidateState.studyPlan
+            : fallback.studyPlan,
+        xp: typeof candidateState.xp === 'number' && candidateState.xp >= 0 ? candidateState.xp : 0,
+        streakDays:
+          typeof candidateState.streakDays === 'number' && candidateState.streakDays >= 0
+            ? candidateState.streakDays
+            : 1,
+        weeklyActivity:
+          Array.isArray(candidateState.weeklyActivity) && candidateState.weeklyActivity.length === 7
+            ? candidateState.weeklyActivity
+            : fallback.weeklyActivity,
+        unlockedAchievementIds: Array.isArray(candidateState.unlockedAchievementIds)
+          ? candidateState.unlockedAchievementIds.map(String)
+          : [],
+        guideDrillsCompleted:
+          typeof candidateState.guideDrillsCompleted === 'number'
+            ? candidateState.guideDrillsCompleted
+            : 0,
+      };
+
+      setState(restored);
+
+      // Also restore imported question packs if included in the backup envelope
+      let restoredPacksCount = 0;
+      if (Array.isArray(parsed.importedPacks) || Array.isArray(parsed.disabledPackIds)) {
+        restoreBackupPacksPayload({
+          importedPacks: parsed.importedPacks,
+          disabledPackIds: parsed.disabledPackIds,
+        });
+        if (Array.isArray(parsed.importedPacks)) {
+          restoredPacksCount = parsed.importedPacks.length;
+        }
+      }
+
+      const vocabCount = Object.keys(restored.vocabProgress).length;
+      return {
+        ok: true,
+        summary: `Restored "${restored.profile.displayName}" · ${restored.attempts.length} test attempts · ${vocabCount} vocabulary records · ${restored.xp.toLocaleString()} XP${restoredPacksCount > 0 ? ` · ${restoredPacksCount} imported question pack(s)` : ''
+          }.`,
+      };
+    } catch (err) {
+      return {
+        ok: false,
+        error:
+          err instanceof Error
+            ? `Invalid JSON file: ${err.message}`
+            : 'Could not read backup JSON file.',
+      };
+    }
+  };
+
   const resetAllProgress = () => {
     localStorage.removeItem(STORAGE_KEY);
     setState({
@@ -527,6 +629,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         toggleStudyTask,
         completeDailyChallenge,
         completeGuideDrill,
+        importAppStateBackup,
         resetAllProgress,
         getMetricValue: (k) => getMetricValue(k, state),
       }}

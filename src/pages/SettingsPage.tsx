@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
-import { Check, Download, Moon, Sun, Trash2 } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Check,
+  CheckCircle2,
+  Download,
+  Moon,
+  Sun,
+  Trash2,
+  Upload,
+  XCircle,
+} from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { getBackupPacksPayload } from '../bank/questionBankRegistry';
 
 const AVATAR_COLORS = ['#0B1733', '#1D4ED8', '#0284C7', '#0F766E', '#4338CA', '#334155'];
 
 export const SettingsPage: React.FC = () => {
-  const { state, updateProfile, resetAllProgress } = useApp();
+  const { state, updateProfile, importAppStateBackup, resetAllProgress } = useApp();
   const p = state.profile;
+  const backupFileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [displayName, setDisplayName] = useState(p.displayName);
   const [targetBand, setTargetBand] = useState(p.targetBand);
@@ -14,6 +25,18 @@ export const SettingsPage: React.FC = () => {
   const [dailyGoalMinutes, setDailyGoalMinutes] = useState(p.dailyGoalMinutes);
   const [saved, setSaved] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [restoreFeedback, setRestoreFeedback] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
+
+  // Keep form fields synchronized if user imports a backup or resets progress
+  useEffect(() => {
+    setDisplayName(p.displayName);
+    setTargetBand(p.targetBand);
+    setTargetTestDate(p.targetTestDate);
+    setDailyGoalMinutes(p.dailyGoalMinutes);
+  }, [p.displayName, p.targetBand, p.targetTestDate, p.dailyGoalMinutes]);
 
   const handleSaveProfile = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,13 +51,47 @@ export const SettingsPage: React.FC = () => {
   };
 
   const handleExportJson = () => {
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const packsPayload = getBackupPacksPayload();
+    const fullBackup = {
+      backupVersion: '1.0',
+      platform: 'AIPP TOEFL TEAM (AIPProject03)',
+      exportedAt: new Date().toISOString(),
+      appState: state,
+      importedPacks: packsPayload.importedPacks,
+      disabledPackIds: packsPayload.disabledPackIds,
+    };
+    const blob = new Blob([JSON.stringify(fullBackup, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `AIPP_TOEFL_TEAM_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
     a.click();
+    a.remove();
     URL.revokeObjectURL(url);
+  };
+
+  const handleImportJson = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const content = typeof reader.result === 'string' ? reader.result : '';
+      const res = importAppStateBackup(content);
+      if (res.ok) {
+        setRestoreFeedback({
+          type: 'success',
+          text: res.summary || 'Study progress successfully restored.',
+        });
+      } else {
+        setRestoreFeedback({
+          type: 'error',
+          text: res.error || 'Failed to import backup file.',
+        });
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
   };
 
   return (
@@ -94,9 +151,8 @@ export const SettingsPage: React.FC = () => {
                   type="button"
                   onClick={() => updateProfile({ avatarColor: c })}
                   aria-label={`Select color ${c}`}
-                  className={`w-8 h-8 rounded-lg transition-transform ${
-                    p.avatarColor === c ? 'ring-2 ring-offset-2 ring-[#1D4ED8] scale-105' : ''
-                  }`}
+                  className={`w-8 h-8 rounded-lg transition-transform ${p.avatarColor === c ? 'ring-2 ring-offset-2 ring-[#1D4ED8] scale-105' : ''
+                    }`}
                   style={{ backgroundColor: c }}
                 />
               ))}
@@ -192,22 +248,20 @@ export const SettingsPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => updateProfile({ theme: 'light' })}
-                className={`inline-flex items-center gap-1.5 min-h-[36px] px-3 rounded-md text-xs font-semibold ${
-                  p.theme === 'light'
+                className={`inline-flex items-center gap-1.5 min-h-[36px] px-3 rounded-md text-xs font-semibold ${p.theme === 'light'
                     ? 'bg-white text-slate-900 shadow-xs'
                     : 'text-slate-500 dark:text-slate-300'
-                }`}
+                  }`}
               >
                 <Sun className="w-3.5 h-3.5" /> Light
               </button>
               <button
                 type="button"
                 onClick={() => updateProfile({ theme: 'dark' })}
-                className={`inline-flex items-center gap-1.5 min-h-[36px] px-3 rounded-md text-xs font-semibold ${
-                  p.theme === 'dark'
+                className={`inline-flex items-center gap-1.5 min-h-[36px] px-3 rounded-md text-xs font-semibold ${p.theme === 'dark'
                     ? 'bg-slate-900 text-white shadow-xs'
                     : 'text-slate-500 dark:text-slate-300'
-                }`}
+                  }`}
               >
                 <Moon className="w-3.5 h-3.5" /> Dark
               </button>
@@ -287,21 +341,54 @@ export const SettingsPage: React.FC = () => {
       {/* Data Management */}
       <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-4">
         <h2 className="font-display text-base font-bold text-slate-900 dark:text-white">
-          Data Persistence &amp; Backup
+          Data Persistence, Backup &amp; Device Transfer
         </h2>
-        <p className="text-xs text-slate-500 leading-relaxed">
-          Your profile, test attempts, SM-2 vocabulary deck, and study plan are stored locally in
-          your browser — 100% built-in with no subscriptions or external accounts required.
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Your profile, test attempts, SM-2 vocabulary deck, study plan, and imported question packs
+          are saved automatically in your browser. Use Export &amp; Import below to back up or move
+          your progress across devices (e.g., laptop to phone).
         </p>
+
+        {restoreFeedback && (
+          <div
+            className={`rounded-xl border p-3.5 text-xs flex items-start gap-2.5 ${restoreFeedback.type === 'success'
+                ? 'border-emerald-200 dark:border-emerald-800 bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200'
+                : 'border-rose-200 dark:border-rose-800 bg-rose-50/70 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200'
+              }`}
+          >
+            {restoreFeedback.type === 'success' ? (
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+            ) : (
+              <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+            )}
+            <span>{restoreFeedback.text}</span>
+          </div>
+        )}
 
         <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={handleExportJson}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="inline-flex items-center gap-2 min-h-[40px] px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
           >
             <Download className="w-3.5 h-3.5" />
-            Export Study Data (JSON)
+            Export Study Backup (JSON)
+          </button>
+
+          <input
+            ref={backupFileInputRef}
+            type="file"
+            accept=".json,application/json"
+            onChange={handleImportJson}
+            className="hidden"
+          />
+          <button
+            type="button"
+            onClick={() => backupFileInputRef.current?.click()}
+            className="inline-flex items-center gap-2 min-h-[40px] px-4 rounded-lg bg-[#0B1733] dark:bg-[#1D4ED8] hover:bg-[#132652] dark:hover:bg-blue-600 text-white text-xs font-semibold transition-colors"
+          >
+            <Upload className="w-3.5 h-3.5" />
+            Import / Restore Backup (JSON)
           </button>
 
           {!confirmReset ? (
