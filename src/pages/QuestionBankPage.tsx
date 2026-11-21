@@ -221,8 +221,9 @@ export const QuestionBankPage: React.FC = () => {
             Question Bank &amp; Content Packs
           </h1>
           <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
-            Monitor active TOEFL 2026 coverage across all four skills and expand your bank at any
-            time by importing validated JSON question packs — no code edits required.
+            Full TOEFL iBT 2026 curriculum built in by default across all four skills and 1,000
+            academic vocabulary terms. Import custom JSON packs anytime for additional practice sets
+            with zero code edits.
           </p>
         </div>
 
@@ -263,8 +264,9 @@ export const QuestionBankPage: React.FC = () => {
               Active Bank Coverage vs. Long-Term Expansion Targets
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Built-in packs provide a full ~120-item 2026 TOEFL simulation plus varied drills out
-              of the box. Import JSON packs below to scale toward 500/500/300/300/1,000 items.
+              Built-in packs deliver full 100% target coverage (500+ Reading, 500 Listening, 300
+              Writing, 300 Speaking, and 1,000 Vocabulary) out of the box. Import custom JSON packs
+              below anytime to expand further.
             </p>
           </div>
           <span className="text-xs font-mono text-slate-500 dark:text-slate-400 tabular-nums shrink-0">
@@ -337,11 +339,10 @@ export const QuestionBankPage: React.FC = () => {
 
             {statusMessage && (
               <div
-                className={`rounded-xl border p-3.5 text-xs flex items-start gap-2.5 ${
-                  statusMessage.type === 'success'
+                className={`rounded-xl border p-3.5 text-xs flex items-start gap-2.5 ${statusMessage.type === 'success'
                     ? 'border-emerald-200 dark:border-emerald-800 bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200'
                     : 'border-rose-200 dark:border-rose-800 bg-rose-50/70 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200'
-                }`}
+                  }`}
               >
                 {statusMessage.type === 'success' ? (
                   <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" />
@@ -434,8 +435,8 @@ export const QuestionBankPage: React.FC = () => {
                           {validationReport.versionStatus === 'upgrade'
                             ? `Upgrade from v${validationReport.existingVersion}`
                             : validationReport.versionStatus === 'same-or-older'
-                            ? `Already Installed (v${validationReport.existingVersion})`
-                            : 'New Pack'}
+                              ? `Already Installed (v${validationReport.existingVersion})`
+                              : 'New Pack'}
                         </span>
                       </div>
                     )}
@@ -483,11 +484,10 @@ export const QuestionBankPage: React.FC = () => {
                   <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3">
                     <div className="text-slate-500">Duplicate IDs</div>
                     <div
-                      className={`font-display text-lg font-bold tabular-nums mt-0.5 ${
-                        validationReport.duplicateIds.length > 0
+                      className={`font-display text-lg font-bold tabular-nums mt-0.5 ${validationReport.duplicateIds.length > 0
                           ? 'text-amber-600 dark:text-amber-400'
                           : 'text-slate-900 dark:text-white'
-                      }`}
+                        }`}
                     >
                       {validationReport.duplicateIds.length}
                     </div>
@@ -495,11 +495,10 @@ export const QuestionBankPage: React.FC = () => {
                   <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3">
                     <div className="text-slate-500">Duplicate Content</div>
                     <div
-                      className={`font-display text-lg font-bold tabular-nums mt-0.5 ${
-                        validationReport.duplicateContentIds.length > 0
+                      className={`font-display text-lg font-bold tabular-nums mt-0.5 ${validationReport.duplicateContentIds.length > 0
                           ? 'text-amber-600 dark:text-amber-400'
                           : 'text-slate-900 dark:text-white'
-                      }`}
+                        }`}
                     >
                       {validationReport.duplicateContentIds.length}
                     </div>
@@ -517,11 +516,10 @@ export const QuestionBankPage: React.FC = () => {
                     {validationReport.issues.map((issue, i) => (
                       <div
                         key={`${issue.path}-${i}`}
-                        className={`rounded-lg border px-3 py-2 text-xs flex items-start gap-2 ${
-                          issue.severity === 'error'
+                        className={`rounded-lg border px-3 py-2 text-xs flex items-start gap-2 ${issue.severity === 'error'
                             ? 'border-rose-200 dark:border-rose-900 bg-rose-50/70 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200'
                             : 'border-amber-200 dark:border-amber-900 bg-amber-50/70 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200'
-                        }`}
+                          }`}
                       >
                         {issue.severity === 'error' ? (
                           <XCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
@@ -583,9 +581,8 @@ export const QuestionBankPage: React.FC = () => {
                           className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[36px] px-3 rounded-lg bg-[#0B1733] dark:bg-[#1D4ED8] hover:bg-[#132652] dark:hover:bg-blue-600 text-white text-xs font-semibold transition-colors"
                         >
                           <RefreshCw
-                            className={`w-3.5 h-3.5 ${
-                              loadingSampleId === sample.id ? 'animate-spin' : ''
-                            }`}
+                            className={`w-3.5 h-3.5 ${loadingSampleId === sample.id ? 'animate-spin' : ''
+                              }`}
                           />
                           {alreadyInstalled ? 'Re-Validate Pack' : 'Load & Validate'}
                         </button>
@@ -665,11 +662,10 @@ export const QuestionBankPage: React.FC = () => {
                 return (
                   <div
                     key={pack.manifest.packId}
-                    className={`rounded-xl border p-4 space-y-3 transition-colors ${
-                      pack.enabled
+                    className={`rounded-xl border p-4 space-y-3 transition-colors ${pack.enabled
                         ? 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/50'
                         : 'border-slate-200/60 dark:border-slate-800/60 bg-slate-50/70 dark:bg-slate-950/20 opacity-65'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
@@ -687,11 +683,10 @@ export const QuestionBankPage: React.FC = () => {
                         type="button"
                         disabled={!canDisable}
                         onClick={() => togglePackEnabled(pack.manifest.packId)}
-                        className={`min-h-[32px] px-3 rounded-lg text-xs font-semibold shrink-0 transition-colors ${
-                          pack.enabled
+                        className={`min-h-[32px] px-3 rounded-lg text-xs font-semibold shrink-0 transition-colors ${pack.enabled
                             ? 'bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
                             : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
-                        } disabled:opacity-45`}
+                          } disabled:opacity-45`}
                       >
                         {pack.enabled ? 'Active' : 'Disabled'}
                       </button>

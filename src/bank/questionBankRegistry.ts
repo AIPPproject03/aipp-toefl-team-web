@@ -8,6 +8,23 @@ import { LISTENING_EXPANSION_PACK } from '../data/packs/listeningExpansion';
 import { WRITING_EXPANSION_PACK } from '../data/packs/writingExpansion';
 import { SPEAKING_EXPANSION_PACK } from '../data/packs/speakingExpansion';
 import { VOCABULARY_EXPANSION_PACK } from '../data/packs/vocabularyExpansion';
+import { READING_CLOZE_MASTER } from '../data/packs/master/readingClozeMaster';
+import { READING_DAILY_MASTER } from '../data/packs/master/readingDailyMaster';
+import { READING_ACADEMIC_MASTER_A } from '../data/packs/master/readingAcademicMasterA';
+import { READING_ACADEMIC_MASTER_B } from '../data/packs/master/readingAcademicMasterB';
+import { LISTENING_RESPONSE_MASTER } from '../data/packs/master/listeningResponseMaster';
+import { LISTENING_CONVERSATION_MASTER } from '../data/packs/master/listeningConversationMaster';
+import { LISTENING_ANNOUNCEMENT_MASTER } from '../data/packs/master/listeningAnnouncementMaster';
+import { LISTENING_TALK_MASTER_A } from '../data/packs/master/listeningTalkMasterA';
+import { LISTENING_TALK_MASTER_B } from '../data/packs/master/listeningTalkMasterB';
+import { WRITING_BUILD_MASTER } from '../data/packs/master/writingBuildMaster';
+import { WRITING_EMAIL_MASTER } from '../data/packs/master/writingEmailMaster';
+import { WRITING_DISCUSSION_MASTER } from '../data/packs/master/writingDiscussionMaster';
+import { SPEAKING_REPEAT_MASTER } from '../data/packs/master/speakingRepeatMaster';
+import { SPEAKING_INTERVIEW_MASTER } from '../data/packs/master/speakingInterviewMaster';
+import { VOCABULARY_MASTER_A } from '../data/packs/master/vocabularyMasterA';
+import { VOCABULARY_MASTER_B } from '../data/packs/master/vocabularyMasterB';
+import { VOCABULARY_MASTER_C } from '../data/packs/master/vocabularyMasterC';
 import {
   AnyQuestion,
   AnyTaskType,
@@ -85,6 +102,29 @@ function buildBuiltinPacks(): InstalledQuestionPack[] {
     ...SPEAKING_EXPANSION_PACK.map((q) => ({ ...q, packId: 'aipp-expansion-2026' })),
   ];
 
+  const completeQuestions: AnyQuestion[] = [
+    ...READING_CLOZE_MASTER,
+    ...READING_DAILY_MASTER,
+    ...READING_ACADEMIC_MASTER_A,
+    ...READING_ACADEMIC_MASTER_B,
+    ...LISTENING_RESPONSE_MASTER,
+    ...LISTENING_CONVERSATION_MASTER,
+    ...LISTENING_ANNOUNCEMENT_MASTER,
+    ...LISTENING_TALK_MASTER_A,
+    ...LISTENING_TALK_MASTER_B,
+    ...WRITING_BUILD_MASTER,
+    ...WRITING_EMAIL_MASTER,
+    ...WRITING_DISCUSSION_MASTER,
+    ...SPEAKING_REPEAT_MASTER,
+    ...SPEAKING_INTERVIEW_MASTER,
+  ].map((q) => ({ ...q, packId: 'aipp-complete-2026' }));
+
+  const completeVocabulary: VocabWord[] = [
+    ...VOCABULARY_MASTER_A,
+    ...VOCABULARY_MASTER_B,
+    ...VOCABULARY_MASTER_C,
+  ].map((v) => ({ ...v, packId: 'aipp-complete-2026' }));
+
   return [
     {
       manifest: {
@@ -119,6 +159,23 @@ function buildBuiltinPacks(): InstalledQuestionPack[] {
       enabled: true,
       questions: expansionQuestions,
       vocabulary: VOCABULARY_EXPANSION_PACK,
+    },
+    {
+      manifest: {
+        packId: 'aipp-complete-2026',
+        name: 'AIPP Complete Mastery & Lexicon Pack',
+        version: '1.0.0',
+        description:
+          'Full institutional-scale curriculum completing 500+ Reading scored items, 500 Listening audio items, 300 Writing prompts, 300 Speaking prompts, and 1,000 CEFR-graded academic vocabulary terms out of the box.',
+        author: 'AIPP TOEFL TEAM',
+        createdAt: '2026-03-01T00:00:00.000Z',
+        source: 'builtin',
+        tags: ['Complete Bank', '100% Target Coverage', '750 Academic Terms'],
+      },
+      installedAt: '2026-03-01T00:00:00.000Z',
+      enabled: true,
+      questions: completeQuestions,
+      vocabulary: completeVocabulary,
     },
   ];
 }
