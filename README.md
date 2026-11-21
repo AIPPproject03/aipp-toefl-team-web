@@ -21,15 +21,39 @@
   <img src="https://img.shields.io/badge/Theme-Light%20%26%20Dark-334155?style=for-the-badge&logo=darkreader&logoColor=white" alt="Light & Dark Theme" />
 </p>
 
-<p align="center">
-  <a href="#-ui-preview">UI Preview</a> •
-  <a href="#-key-features">Key Features</a> •
-  <a href="#-question-bank--json-expansion">Question Bank</a> •
-  <a href="#-tech-stack">Tech Stack</a> •
-  <a href="#-architecture">Architecture</a> •
-  <a href="#-getting-started">Getting Started</a> •
-  <a href="#-json-pack-schema">JSON Packs</a>
-</p>
+<br />
+
+<!-- Sleek Clickable GitHub Navigation Bar -->
+<table>
+  <tr>
+    <td align="center">
+      <a href="#ui-preview">
+        <img src="https://img.shields.io/badge/UI_Preview-0B1733?style=for-the-badge&logo=framer&logoColor=22D3EE" alt="UI Preview" />
+      </a>
+      <a href="#key-features">
+        <img src="https://img.shields.io/badge/Features-0B1733?style=for-the-badge&logo=starship&logoColor=22D3EE" alt="Key Features" />
+      </a>
+      <a href="#question-bank">
+        <img src="https://img.shields.io/badge/Question_Bank-0B1733?style=for-the-badge&logo=databricks&logoColor=22D3EE" alt="Question Bank" />
+      </a>
+      <a href="#backup-restore">
+        <img src="https://img.shields.io/badge/Backup_%26_Restore-0B1733?style=for-the-badge&logo=icloud&logoColor=22D3EE" alt="Backup and Restore" />
+      </a>
+      <a href="#tech-stack">
+        <img src="https://img.shields.io/badge/Tech_Stack-0B1733?style=for-the-badge&logo=stackblitz&logoColor=22D3EE" alt="Tech Stack" />
+      </a>
+      <a href="#architecture">
+        <img src="https://img.shields.io/badge/Architecture-0B1733?style=for-the-badge&logo=diagramsdotnet&logoColor=22D3EE" alt="Architecture" />
+      </a>
+      <a href="#json-packs">
+        <img src="https://img.shields.io/badge/JSON_Packs-0B1733?style=for-the-badge&logo=json&logoColor=22D3EE" alt="JSON Packs" />
+      </a>
+      <a href="#getting-started">
+        <img src="https://img.shields.io/badge/Get_Started-1D4ED8?style=for-the-badge&logo=vite&logoColor=FFFFFF" alt="Getting Started" />
+      </a>
+    </td>
+  </tr>
+</table>
 
 </div>
 
@@ -43,6 +67,7 @@ Built with **zero external AI subscriptions or paywalled API dependencies**, the
 
 ---
 
+<a id="ui-preview"></a>
 ## 🖥️ UI Preview
 
 <div align="center">
@@ -53,6 +78,7 @@ Built with **zero external AI subscriptions or paywalled API dependencies**, the
 
 ---
 
+<a id="key-features"></a>
 ## ✨ Key Features
 
 <table>
@@ -87,10 +113,11 @@ Built with **zero external AI subscriptions or paywalled API dependencies**, the
       </ul>
     </td>
     <td width="50%" valign="top">
-      <h3>🧠 Vocabulary Builder, Analytics &amp; JSON Packs</h3>
+      <h3>🧠 Vocabulary, Backup &amp; JSON Expansion</h3>
       <ul>
-        <li><b>SM-2 Spaced Repetition</b> flashcards, randomized 10-word quizzes, audio pronunciation, and daily-rotating <b>Word of the Day</b></li>
+        <li><b>SM-2 Spaced Repetition</b> flashcards, randomized 10-word quizzes, audio pronunciation, and daily-rotating <b>Word of the Day</b> across all 250+ active words</li>
         <li><b>Performance Analytics</b> with multi-line section trends, task-type mastery charts, and one-click Mistake Remediation</li>
+        <li><b>1-Click Export &amp; Import Study Backup (JSON)</b> in Settings to safeguard progress or transfer across devices (laptop ↔ mobile)</li>
         <li><b>JSON Question Pack Manager</b> with schema validation, semver upgrade tracking, duplicate ID detection, and normalized content fingerprinting</li>
       </ul>
     </td>
@@ -99,6 +126,7 @@ Built with **zero external AI subscriptions or paywalled API dependencies**, the
 
 ---
 
+<a id="question-bank"></a>
 ## 📦 Question Bank & JSON Expansion
 
 The platform ships with a genuinely original, zero-duplicate curated dataset and transparently tracks active coverage toward long-term institutional expansion targets inside **Question Bank & Packs**:
@@ -117,6 +145,22 @@ The platform ships with a genuinely original, zero-duplicate curated dataset and
 
 ---
 
+<a id="backup-restore"></a>
+## 💾 Data Persistence, Backup & Device Transfer
+
+All progress is **saved automatically in your browser's built-in storage (`localStorage`)** — no sign-up, no server account, and no subscription required.
+
+| Capability | How It Works |
+| :--- | :--- |
+| **Automatic Local Saving** | Profile, certificate name, test history, band scores, mistake logs, autosaved unfinished exam drafts, SM-2 vocabulary deck, XP, streaks, study plan, achievements, and imported JSON question packs persist automatically in your browser. |
+| **Export Study Backup (JSON)** | Go to **Settings → Data Persistence, Backup & Device Transfer → `Export Study Backup (JSON)`** to download a single `.json` snapshot containing **all your progress + any imported question packs**. |
+| **Import / Restore Backup (JSON)** | On a new device (e.g., transferring from laptop to phone) or after clearing browser cache, click **`Import / Restore Backup (JSON)`** in **Settings** to validate and restore your complete study history instantly. |
+
+> 💡 **Tip for Users:** Browser `localStorage` is scoped to the specific device, browser profile, and site URL (it does not sync automatically via Chrome Sync). Exporting a quick backup `.json` file makes moving between devices effortless and protects against accidental browser cache clears.
+
+---
+
+<a id="tech-stack"></a>
 ## 🛠️ Tech Stack
 
 <div align="center">
@@ -150,6 +194,7 @@ The platform ships with a genuinely original, zero-duplicate curated dataset and
 
 ---
 
+<a id="architecture"></a>
 ## 🏗️ Architecture
 
 ```mermaid
@@ -206,7 +251,7 @@ flowchart LR
 │   │   ├── StudyPlanPage.tsx          # Weekly schedule & target band roadmap
 │   │   ├── HistoryPage.tsx            # Past simulations & PDF certificate re-download
 │   │   ├── AchievementsPage.tsx       # Gamified badges, levels & streaks
-│   │   └── SettingsPage.tsx           # Candidate profile, theme & exam preferences
+│   │   └── SettingsPage.tsx           # Profile, theme, preferences & JSON backup/restore
 │   ├── types/toefl.ts                 # Complete TypeScript models for 2026 format
 │   └── utils/
 │       ├── audio.ts                   # Multi-voice Web Speech synthesizer & chimes
@@ -220,6 +265,7 @@ flowchart LR
 
 ---
 
+<a id="getting-started"></a>
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -251,6 +297,7 @@ npm run dev
 
 ---
 
+<a id="json-packs"></a>
 ## 🧩 JSON Pack Schema
 
 You can expand your question bank at any time from **Question Bank & Packs** without editing application code. Download the starter template directly inside the app or follow `schemaVersion: "1.0"`:
