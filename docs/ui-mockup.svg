@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620" role="img" aria-label="AIPP TOEFL TEAM Desktop and Mobile UI Mockup">
+  <defs>
+    <linearGradient id="canvasBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="120%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#020617" flood-opacity="0.45" />
+    </filter>
+    <clipPath id="desktopClip">
+      <rect x="36" y="42" width="840" height="536" rx="16" />
+    </clipPath>
+    <clipPath id="mobileClip">
+      <rect x="912" y="96" width="252" height="482" rx="28" />
+    </clipPath>
+  </defs>
+
+  <!-- Outer presentation backdrop -->
+  <rect width="1200" height="620" rx="20" fill="url(#canvasBg)" />
+
+  <!-- ========================================================= -->
+  <!-- DESKTOP BROWSER FRAME (LEFT)                              -->
+  <!-- ========================================================= -->
+  <g filter="url(#shadow)">
+    <g clip-path="url(#desktopClip)">
+      <!-- App shell light background -->
+      <rect x="36" y="42" width="840" height="536" fill="#F8FAFC" />
+
+      <!-- Browser Chrome Bar -->
+      <rect x="36" y="42" width="840" height="36" fill="#0F172A" />
+      <circle cx="58" cy="60" r="5" fill="#F43F5E" />
+      <circle cx="76" cy="60" r="5" fill="#F59E0B" />
+      <circle cx="94" cy="60" r="5" fill="#10B981" />
+      <rect x="290" y="50" width="330" height="20" rx="6" fill="#1E293B" />
+      <text x="455" y="64" text-anchor="middle" fill="#94A3B8" font-family="ui-monospace, monospace" font-size="10.5">aipp-toefl-team · AIPProject03</text>
+
+      <!-- Institutional Left Sidebar (#0B1733) -->
+      <rect x="36" y="78" width="184" height="500" fill="#0B1733" />
+      <!-- Brand Header -->
+      <rect x="52" y="96" width="28" height="28" rx="7" fill="#1D4ED8" />
+      <text x="66" y="114" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="12" font-weight="800">A</text>
+      <text x="88" y="108" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="11.5" font-weight="800">AIPP TOEFL</text>
+      <text x="88" y="121" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="9" font-weight="600">AIPProject03</text>
+      <line x1="36" y1="138" x2="220" y2="138" stroke="#FFFFFF" stroke-opacity="0.08" />
+
+      <!-- Nav Items -->
+      <g font-family="system-ui, sans-serif" font-size="11" font-weight="600">
+        <text x="54" y="160" fill="#64748B" font-size="9" letter-spacing="0.8">PRACTICE &amp; LEARN</text>
+        <rect x="48" y="168" width="160" height="28" rx="7" fill="#1D4ED8" />
+        <text x="64" y="186" fill="#FFFFFF">Dashboard</text>
+        <text x="64" y="216" fill="#CBD5E1">Practice Center</text>
+        <text x="64" y="242" fill="#CBD5E1">Full Test Simulation</text>
+        <text x="64" y="268" fill="#CBD5E1">Section Practice</text>
+        <text x="64" y="294" fill="#67E8F9">Question Bank &amp; Packs</text>
+        <text x="64" y="320" fill="#CBD5E1">Vocabulary Builder</text>
+        <text x="64" y="346" fill="#CBD5E1">Study Guide</text>
+
+        <text x="54" y="382" fill="#64748B" font-size="9" letter-spacing="0.8">TRACK PROGRESS</text>
+        <text x="64" y="404" fill="#CBD5E1">Analytics &amp; Mistakes</text>
+        <text x="64" y="430" fill="#CBD5E1">Score History</text>
+        <text x="64" y="456" fill="#CBD5E1">Achievements</text>
+      </g>
+
+      <!-- Sidebar Footer Candidate -->
+      <rect x="36" y="514" width="184" height="64" fill="#081126" />
+      <rect x="50" y="528" width="28" height="28" rx="7" fill="#1D4ED8" />
+      <text x="64" y="546" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700">AI</text>
+      <text x="86" y="540" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="11" font-weight="700">Candidate</text>
+      <text x="86" y="554" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="9.5">Lvl 6 · 7-day streak</text>
+
+      <!-- Top Sticky Header -->
+      <rect x="220" y="78" width="656" height="44" fill="#FFFFFF" />
+      <line x1="220" y1="122" x2="876" y2="122" stroke="#E2E8F0" />
+      <text x="242" y="104" fill="#64748B" font-family="system-ui, sans-serif" font-size="11.5" font-weight="500">AIPP TOEFL TEAM  /</text>
+      <text x="358" y="104" fill="#0F172A" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700">Dashboard</text>
+      <rect x="752" y="88" width="104" height="24" rx="6" fill="#1D4ED8" />
+      <text x="804" y="104" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700">Start Full Test</text>
+
+      <!-- Hero Readiness Navy Card -->
+      <rect x="242" y="138" width="612" height="148" rx="14" fill="#0B1733" />
+      <text x="266" y="164" fill="#67E8F9" font-family="system-ui, sans-serif" font-size="10.5" font-weight="600">TOEFL iBT (January 2026 Format) · 10-Mode Dynamic Engine</text>
+      <text x="266" y="192" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="21" font-weight="800">Adaptive Simulation Readiness</text>
+      <text x="266" y="214" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="11.5">Target Band 5.5 · 278 Built-in Scored Items · 250 Academic Terms</text>
+
+      <!-- CTA Buttons in Hero -->
+      <rect x="266" y="234" width="142" height="32" rx="8" fill="#1D4ED8" />
+      <text x="337" y="254" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="11" font-weight="700">Adaptive Full Test</text>
+      <rect x="418" y="234" width="132" height="32" rx="8" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.2" />
+      <text x="484" y="254" text-anchor="middle" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">JSON Pack Bank</text>
+
+      <!-- Animated Score Ring inside Hero -->
+      <g transform="translate(772, 212)">
+        <circle cx="0" cy="0" r="46" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="7" />
+        <circle cx="0" cy="0" r="46" fill="none" stroke="#22D3EE" stroke-width="7" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="48" transform="rotate(-90)">
+          <animate attributeName="stroke-dashoffset" values="289;48;48" dur="2s" fill="freeze" />
+        </circle>
+        <text x="0" y="-8" text-anchor="middle" fill="#67E8F9" font-family="system-ui, sans-serif" font-size="9" font-weight="700">BAND</text>
+        <text x="0" y="15" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="22" font-weight="800">5.0</text>
+        <text x="0" y="30" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="9">CEFR C1</text>
+      </g>
+
+      <!-- 4 Skill Cards Row -->
+      <g transform="translate(242, 302)" font-family="system-ui, sans-serif">
+        <!-- Reading -->
+        <rect x="0" y="0" width="144" height="94" rx="12" fill="#FFFFFF" stroke="#E2E8F0" />
+        <text x="14" y="24" fill="#64748B" font-size="10.5" font-weight="600">Reading</text>
+        <text x="14" y="52" fill="#0F172A" font-size="22" font-weight="800">5.0</text>
+        <text x="54" y="52" fill="#1D4ED8" font-size="10" font-weight="600">/ 6.0</text>
+        <rect x="14" y="66" width="116" height="6" rx="3" fill="#E2E8F0" />
+        <rect x="14" y="66" width="96" height="6" rx="3" fill="#1D4ED8" />
+        <text x="14" y="84" fill="#64748B" font-size="9.5">106 items · Adaptive</text>
+
+        <!-- Listening -->
+        <rect x="156" y="0" width="144" height="94" rx="12" fill="#FFFFFF" stroke="#E2E8F0" />
+        <text x="170" y="24" fill="#64748B" font-size="10.5" font-weight="600">Listening</text>
+        <text x="170" y="52" fill="#0F172A" font-size="22" font-weight="800">5.0</text>
+        <text x="210" y="52" fill="#0891B2" font-size="10" font-weight="600">/ 6.0</text>
+        <rect x="170" y="66" width="116" height="6" rx="3" fill="#E2E8F0" />
+        <rect x="170" y="66" width="94" height="6" rx="3" fill="#06B6D4" />
+        <text x="170" y="84" fill="#64748B" font-size="9.5">60 audio items</text>
+
+        <!-- Writing -->
+        <rect x="312" y="0" width="144" height="94" rx="12" fill="#FFFFFF" stroke="#E2E8F0" />
+        <text x="326" y="24" fill="#64748B" font-size="10.5" font-weight="600">Writing</text>
+        <text x="326" y="52" fill="#0F172A" font-size="22" font-weight="800">4.5</text>
+        <text x="366" y="52" fill="#4F46E5" font-size="10" font-weight="600">/ 6.0</text>
+        <rect x="326" y="66" width="116" height="6" rx="3" fill="#E2E8F0" />
+        <rect x="326" y="66" width="84" height="6" rx="3" fill="#6366F1" />
+        <text x="326" y="84" fill="#64748B" font-size="9.5">56 syntax &amp; essays</text>
+
+        <!-- Speaking -->
+        <rect x="468" y="0" width="144" height="94" rx="12" fill="#FFFFFF" stroke="#E2E8F0" />
+        <text x="482" y="24" fill="#64748B" font-size="10.5" font-weight="600">Speaking</text>
+        <text x="482" y="52" fill="#0F172A" font-size="22" font-weight="800">5.0</text>
+        <text x="522" y="52" fill="#D97706" font-size="10" font-weight="600">/ 6.0</text>
+        <rect x="482" y="66" width="116" height="6" rx="3" fill="#E2E8F0" />
+        <rect x="482" y="66" width="92" height="6" rx="3" fill="#F59E0B" />
+        <text x="482" y="84" fill="#64748B" font-size="9.5">56 voice prompts</text>
+      </g>
+
+      <!-- Bottom Charts Row -->
+      <!-- Score Trend Card -->
+      <rect x="242" y="412" width="368" height="148" rx="12" fill="#FFFFFF" stroke="#E2E8F0" />
+      <text x="260" y="436" fill="#0F172A" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Band Score Progression (1.0–6.0)</text>
+      <line x1="260" y1="464" x2="590" y2="464" stroke="#F1F5F9" />
+      <line x1="260" y1="494" x2="590" y2="494" stroke="#F1F5F9" />
+      <line x1="260" y1="524" x2="590" y2="524" stroke="#F1F5F9" />
+      <polyline points="266,522 330,508 395,496 460,482 525,470 584,458" fill="none" stroke="#1D4ED8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+      <polyline points="266,530 330,520 395,505 460,498 525,484 584,474" fill="none" stroke="#06B6D4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="584" cy="458" r="4.5" fill="#1D4ED8" />
+      <circle cx="584" cy="474" r="4" fill="#06B6D4" />
+
+      <!-- JSON Pack Manager Mini Card -->
+      <rect x="624" y="412" width="230" height="148" rx="12" fill="#FFFFFF" stroke="#E2E8F0" />
+      <text x="640" y="436" fill="#0F172A" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Expandable JSON Bank</text>
+      <text x="640" y="456" fill="#64748B" font-family="system-ui, sans-serif" font-size="10">Schema v1.0 · Duplicate Guard</text>
+      <rect x="640" y="472" width="198" height="28" rx="7" fill="#EFF6FF" stroke="#BFDBFE" />
+      <text x="650" y="490" fill="#1D4ED8" font-family="ui-monospace, monospace" font-size="10" font-weight="700">aipp-core-2026 v1.0.0</text>
+      <rect x="640" y="508" width="198" height="28" rx="7" fill="#ECFEFF" stroke="#A5F3FC" />
+      <text x="650" y="526" fill="#0E7490" font-family="ui-monospace, monospace" font-size="10" font-weight="700">+ Import Custom .json</text>
+    </g>
+    <rect x="36" y="42" width="840" height="536" rx="16" fill="none" stroke="#334155" stroke-width="1.5" />
+  </g>
+
+  <!-- ========================================================= -->
+  <!-- MOBILE RESPONSIVE FRAME (RIGHT)                           -->
+  <!-- ========================================================= -->
+  <g filter="url(#shadow)">
+    <g clip-path="url(#mobileClip)">
+      <rect x="912" y="96" width="252" height="482" fill="#060D1F" />
+      <!-- Top Notch / Status Bar -->
+      <rect x="996" y="106" width="84" height="14" rx="7" fill="#0F172A" />
+      <!-- Mobile Header -->
+      <rect x="912" y="128" width="252" height="44" fill="#0B1733" />
+      <text x="932" y="155" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="13" font-weight="800">AIPP TOEFL</text>
+      <rect x="1086" y="138" width="60" height="24" rx="6" fill="#1D4ED8" />
+      <text x="1116" y="154" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="10" font-weight="700">Mock</text>
+
+      <!-- Mobile Exam Timer Card -->
+      <rect x="928" y="186" width="220" height="66" rx="12" fill="#0B1733" stroke="#1E293B" />
+      <text x="942" y="206" fill="#67E8F9" font-family="system-ui, sans-serif" font-size="9.5" font-weight="600">ADAPTIVE READING · STAGE 2</text>
+      <text x="942" y="226" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="12.5" font-weight="700">Question 18 of 36</text>
+      <rect x="1082" y="208" width="54" height="24" rx="6" fill="#FFFFFF" fill-opacity="0.1" />
+      <text x="1109" y="224" text-anchor="middle" fill="#FFFFFF" font-family="ui-monospace, monospace" font-size="11" font-weight="700">21:40</text>
+
+      <!-- Mobile Question Card -->
+      <rect x="928" y="266" width="220" height="244" rx="12" fill="#0F172A" stroke="#1E293B" />
+      <text x="942" y="288" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="10" font-weight="600">Academic Passage · C1</text>
+      <text x="942" y="308" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="12.5" font-weight="700">Urban Heat Islands</text>
+      <rect x="942" y="320" width="190" height="6" rx="3" fill="#334155" />
+      <rect x="942" y="332" width="168" height="6" rx="3" fill="#334155" />
+      <rect x="942" y="344" width="178" height="6" rx="3" fill="#334155" />
+
+      <!-- MCQ Options -->
+      <rect x="942" y="366" width="192" height="32" rx="8" fill="#1E293B" />
+      <text x="954" y="386" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="10.5">A. Surface reflectivity drop</text>
+
+      <rect x="942" y="406" width="192" height="32" rx="8" fill="#1D4ED8" fill-opacity="0.28" stroke="#38BDF8" />
+      <text x="954" y="426" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700">B. Evapotranspiration cooling</text>
+
+      <rect x="942" y="446" width="192" height="32" rx="8" fill="#1E293B" />
+      <text x="954" y="466" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="10.5">C. Subsurface wind shear</text>
+
+      <!-- Mobile Bottom Tab Bar -->
+      <rect x="912" y="528" width="252" height="50" fill="#0B1733" />
+      <line x1="912" y1="528" x2="1164" y2="528" stroke="#1E293B" />
+      <g font-family="system-ui, sans-serif" font-size="9.5" font-weight="600" text-anchor="middle">
+        <text x="937" y="556" fill="#64748B">Home</text>
+        <text x="987" y="556" fill="#64748B">Practice</text>
+        <text x="1038" y="556" fill="#22D3EE">Mock</text>
+        <text x="1089" y="556" fill="#64748B">Vocab</text>
+        <text x="1139" y="556" fill="#64748B">More</text>
+      </g>
+    </g>
+    <rect x="912" y="96" width="252" height="482" rx="28" fill="none" stroke="#475569" stroke-width="2.5" />
+  </g>
+</svg>

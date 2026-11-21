@@ -1,0 +1,6 @@
+{
+  "name": "AIPP TOEFL TEAM",
+  "description": "AIPP TOEFL TEAM — TOEFL iBT Simulation & Learning Platform (2026 Format). Practice Smarter. Perform Better. Reach Your Target.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": []
+}

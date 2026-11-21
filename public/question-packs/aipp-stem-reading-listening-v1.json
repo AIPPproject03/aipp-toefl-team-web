@@ -1,0 +1,432 @@
+{
+  "schemaVersion": "1.0",
+  "manifest": {
+    "packId": "aipp-stem-reading-listening",
+    "name": "STEM Reading & Listening Expansion Pack",
+    "version": "1.0.0",
+    "description": "12 original STEM-focused Reading and Listening exercises plus 20 specialized STEM vocabulary entries ready for zero-code JSON import.",
+    "author": "AIPP TOEFL TEAM Curriculum Lab",
+    "createdAt": "2026-03-15T00:00:00.000Z",
+    "source": "imported",
+    "tags": ["STEM", "Reading", "Listening", "Vocabulary", "2026 Format"]
+  },
+  "questions": [
+    {
+      "id": "pack-stem-rd-cw-01",
+      "section": "reading",
+      "taskType": "complete-the-words",
+      "difficulty": "Advanced",
+      "topic": "Biotechnology",
+      "learningObjective": "Complete molecular biology vocabulary in an academic passage.",
+      "skillFocus": "Lexical & Contextual Precision",
+      "estimatedTimeSec": 115,
+      "keywords": ["enzymes", "plastics", "bioremediation", "catalysis"],
+      "cefr": "C1",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.35,
+      "title": "Engineered Enzymes for Polyethylene Terephthalate Recycling",
+      "hint": "Check whether each blank requires a verb, noun, or adjective matching biochemical prose.",
+      "passageTemplate": "Conventional mechanical recycling gradually degrades plastic bottles into lower-grade fibers that eventually reach landfills. Recently, biochemists discovered a soil bacterium capable of secreting specialized enzymes that {{b1}} rigid polyester chains back into their original chemical building blocks. By introducing targeted mutations around the enzyme’s active pocket, laboratory teams dramatically {{b2}} its thermal stability so it operates efficiently inside industrial reactors. Unlike high-heat chemical depolymerization, enzymatic recycling consumes modest electricity and avoids harsh {{b3}} solvents. Pilot facilities have already {{b4}} bottle-grade resin indistinguishable from petroleum-derived plastic, offering a promising blueprint for circular materials {{b5}}.",
+      "blanks": [
+        { "blankId": "b1", "prefix": "dism", "answer": "dismantle", "acceptedVariants": ["dismantle"], "contextHint": "Verb meaning 'break apart into component pieces'." },
+        { "blankId": "b2", "prefix": "enhan", "answer": "enhanced", "acceptedVariants": ["enhanced"], "contextHint": "Past verb meaning 'improved significantly'." },
+        { "blankId": "b3", "prefix": "tox", "answer": "toxic", "acceptedVariants": ["toxic"], "contextHint": "Adjective meaning 'poisonous or hazardous'." },
+        { "blankId": "b4", "prefix": "synthes", "answer": "synthesized", "acceptedVariants": ["synthesized", "synthesised"], "contextHint": "Past participle meaning 'chemically produced'." },
+        { "blankId": "b5", "prefix": "recover", "answer": "recovery", "acceptedVariants": ["recovery"], "contextHint": "Noun meaning 'reclamation for reuse'." }
+      ],
+      "explanation": "Each completion fits biochemical recycling collocations: enzymes 'dismantle' chains, mutations 'enhanced' stability, avoids 'toxic' solvents, 'synthesized' resin, and materials 'recovery'."
+    },
+    {
+      "id": "pack-stem-rd-dl-01",
+      "section": "reading",
+      "taskType": "read-daily-life",
+      "difficulty": "Intermediate",
+      "topic": "Campus Computing",
+      "learningObjective": "Interpret cluster usage limits and queue priorities in an HPC notice.",
+      "skillFocus": "Technical Notice Comprehension",
+      "estimatedTimeSec": 75,
+      "keywords": ["HPC", "cluster", "GPU", "allocation"],
+      "cefr": "B2",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.15,
+      "passageId": "p-pack-stem-hpc",
+      "passageTitle": "Research Computing Cluster: GPU Queue Policy Revision",
+      "passageMeta": "Center for Computational Science · User Bulletin",
+      "passageParagraphs": [
+        "Due to surging semester-end simulation traffic, interactive GPU sessions on the Meridian Cluster are temporarily capped at four hours per job starting Monday. Long-running batch jobs lasting up to 48 hours remain available through the standard overnight queue, provided users submit a checkpointing script that saves intermediate states every two hours.",
+        "Jobs running inside the scratch directory without modification for 21 days are automatically purged to keep disk utilization below 85%. Researchers needing durable archival storage should transfer finished outputs to their departmental project volume before leaving for break."
+      ],
+      "question": "What must a researcher include to run a 36-hour GPU batch job on the Meridian Cluster?",
+      "options": [
+        "Approval from the departmental chair to exceed 85% disk capacity",
+        "A checkpointing script that saves intermediate states every two hours",
+        "A request to move the job into the interactive session queue",
+        "Confirmation that all files reside permanently in the scratch directory"
+      ],
+      "correctAnswerIndex": 1,
+      "hint": "Check the condition attached to 48-hour batch jobs in paragraph 1.",
+      "explanation": "Batch jobs lasting up to 48 hours require submitting a checkpointing script that saves intermediate states every two hours."
+    },
+    {
+      "id": "pack-stem-rd-ac-01",
+      "section": "reading",
+      "taskType": "read-academic-passage",
+      "difficulty": "Advanced",
+      "topic": "Planetary Geology",
+      "learningObjective": "Identify evidence supporting ancient liquid water flows on Mars.",
+      "skillFocus": "Geomorphological Evidence",
+      "estimatedTimeSec": 85,
+      "keywords": ["Mars", "Jezero Crater", "delta", "sediment"],
+      "cefr": "C1",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.35,
+      "passageId": "p-pack-stem-mars",
+      "passageTitle": "Fossil Rivers of Jezero Crater: Reading Martian Delta Stratigraphy",
+      "passageSubtitle": "Planetary Geology · Astrobiology",
+      "passageParagraphs": [
+        "Today Mars is a frigid desert whose thin carbon-dioxide atmosphere cannot sustain stable liquid water on the open surface. Yet orbital imagery of Jezero Crater—a 45-kilometer-wide impact basin north of the Martian equator—reveals a fan-shaped sedimentary deposit identical in geometry to terrestrial river deltas formed where flowing rivers decelerate into calm lakes.",
+        "High-resolution rover images of exposed cliff faces along the delta’s edge confirmed alternating horizontal layers of fine mudstone topped by abruptly deposited boulder conglomerates. Geologists interpret the lower fine-grained clay layers as deposits settled during a prolonged, tranquil lake era roughly 3.5 billion years ago, whereas the heavy rounded boulders above signal violent flash floods late in the basin’s history as the regional climate shifted toward arid instability."
+      ],
+      "question": "What do the heavy rounded boulders atop the finer clay layers in Jezero Crater indicate?",
+      "options": [
+        "A transition from a calm lake environment to episodic violent flash floods",
+        "A volcanic eruption that filled the crater before any river existed",
+        "Glacial ice sheets that melted gradually over ten million years",
+        "Windblown sand dunes cemented together by carbon-dioxide frost"
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Compare the interpretation of fine clay layers versus rounded boulders in paragraph 2.",
+      "explanation": "Fine clay layers reflect a calm lake era, whereas overlying rounded boulder conglomerates indicate violent flash floods during a later climate shift."
+    },
+    {
+      "id": "pack-stem-rd-ac-02",
+      "section": "reading",
+      "taskType": "read-academic-passage",
+      "difficulty": "Intermediate",
+      "topic": "Planetary Geology",
+      "learningObjective": "Recognize why geologists compare Jezero deposits to Earth river deltas.",
+      "skillFocus": "Analogy & Factual Detail",
+      "estimatedTimeSec": 75,
+      "keywords": ["Mars", "delta", "orbit", "analogy"],
+      "cefr": "B2",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.2,
+      "passageId": "p-pack-stem-mars",
+      "passageTitle": "Fossil Rivers of Jezero Crater: Reading Martian Delta Stratigraphy",
+      "passageSubtitle": "Planetary Geology · Astrobiology",
+      "passageParagraphs": [
+        "Today Mars is a frigid desert whose thin carbon-dioxide atmosphere cannot sustain stable liquid water on the open surface. Yet orbital imagery of Jezero Crater—a 45-kilometer-wide impact basin north of the Martian equator—reveals a fan-shaped sedimentary deposit identical in geometry to terrestrial river deltas formed where flowing rivers decelerate into calm lakes.",
+        "High-resolution rover images of exposed cliff faces along the delta’s edge confirmed alternating horizontal layers of fine mudstone topped by abruptly deposited boulder conglomerates. Geologists interpret the lower fine-grained clay layers as deposits settled during a prolonged, tranquil lake era roughly 3.5 billion years ago, whereas the heavy rounded boulders above signal violent flash floods late in the basin’s history as the regional climate shifted toward arid instability."
+      ],
+      "question": "According to paragraph 1, why can liquid water NOT persist stably on the Martian surface today?",
+      "options": [
+        "Martian rivers move too rapidly to slow down into crater lakes.",
+        "The planet’s thin carbon-dioxide atmosphere and frigid temperatures prevent stable surface liquid water.",
+        "Jezero Crater sits too close to the Martian equator.",
+        "Sedimentary clay layers absorb all atmospheric moisture instantly."
+      ],
+      "correctAnswerIndex": 1,
+      "hint": "Check the opening sentence of paragraph 1.",
+      "explanation": "Paragraph 1 states that Mars is a frigid desert whose thin carbon-dioxide atmosphere cannot sustain stable liquid water on the surface."
+    },
+    {
+      "id": "pack-stem-rd-ac-03",
+      "section": "reading",
+      "taskType": "read-academic-passage",
+      "difficulty": "Advanced",
+      "topic": "Acoustics & Architecture",
+      "learningObjective": "Understand how Helmholtz resonators absorb low-frequency room rumble.",
+      "skillFocus": "Acoustic Physics Comprehension",
+      "estimatedTimeSec": 85,
+      "keywords": ["Helmholtz resonator", "acoustics", "concert hall", "bass"],
+      "cefr": "C1",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.3,
+      "passageId": "p-pack-stem-helmholtz",
+      "passageTitle": "Taming Low Frequencies: Slotted Resonators in Concert Hall Design",
+      "passageSubtitle": "Applied Acoustics · Architectural Physics",
+      "passageParagraphs": [
+        "Controlling high-pitched echo in an auditorium is relatively simple: porous fiberglass panels or heavy curtains convert short sound waves into negligible heat through friction. Low-frequency bass wavelengths, however, can stretch several meters long and pass effortlessly straight through thin drapes, bouncing off concrete walls to create muddy booming resonances.",
+        "To absorb targeted bass frequencies without sacrificing floor space, acoustic engineers embed Helmholtz resonators—sealed air cavities connected to the room by narrow timber slots—directly behind wood paneling. Much like air vibrating when blown across the neck of a glass bottle, sound waves at the cavity’s tuned frequency force air inside the slot to oscillate vigorously, dissipating excess bass energy through viscous friction while leaving upper musical harmonics crisp and lively."
+      ],
+      "question": "Why are thin fabric curtains ineffective at eliminating muddy bass resonance in concrete halls?",
+      "options": [
+        "Fabric curtains amplify high-pitched musical harmonics.",
+        "Long low-frequency sound waves pass straight through thin porous materials without significant friction.",
+        "Curtains block airflow needed for Helmholtz cavities to breathe.",
+        "Bass frequencies travel only through wooden floor joists."
+      ],
+      "correctAnswerIndex": 1,
+      "hint": "Read the second sentence of paragraph 1.",
+      "explanation": "Low-frequency bass wavelengths stretch several meters and pass right through thin drapes, reflecting off concrete walls."
+    },
+    {
+      "id": "pack-stem-rd-ac-04",
+      "section": "reading",
+      "taskType": "read-academic-passage",
+      "difficulty": "Intermediate",
+      "topic": "Acoustics & Architecture",
+      "learningObjective": "Understand the glass-bottle analogy explaining resonator tuning.",
+      "skillFocus": "Analogy Purpose",
+      "estimatedTimeSec": 75,
+      "keywords": ["resonator", "analogy", "oscillation"],
+      "cefr": "B2",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.2,
+      "passageId": "p-pack-stem-helmholtz",
+      "passageTitle": "Taming Low Frequencies: Slotted Resonators in Concert Hall Design",
+      "passageSubtitle": "Applied Acoustics · Architectural Physics",
+      "passageParagraphs": [
+        "Controlling high-pitched echo in an auditorium is relatively simple: porous fiberglass panels or heavy curtains convert short sound waves into negligible heat through friction. Low-frequency bass wavelengths, however, can stretch several meters long and pass effortlessly straight through thin drapes, bouncing off concrete walls to create muddy booming resonances.",
+        "To absorb targeted bass frequencies without sacrificing floor space, acoustic engineers embed Helmholtz resonators—sealed air cavities connected to the room by narrow timber slots—directly behind wood paneling. Much like air vibrating when blown across the neck of a glass bottle, sound waves at the cavity’s tuned frequency force air inside the slot to oscillate vigorously, dissipating excess bass energy through viscous friction while leaving upper musical harmonics crisp and lively."
+      ],
+      "question": "Why does the author compare slotted wall cavities to blowing across the neck of a glass bottle?",
+      "options": [
+        "To show that concert halls should incorporate glass walls for brighter sound.",
+        "To illustrate how air inside a narrow opening oscillates strongly at one tuned resonant frequency.",
+        "To argue that Helmholtz resonators generate louder bass notes for orchestras.",
+        "To prove that viscous friction occurs only inside cylindrical containers."
+      ],
+      "correctAnswerIndex": 1,
+      "hint": "Look at how the analogy introduces the mechanism of slot oscillation in paragraph 2.",
+      "explanation": "The bottle analogy clarifies how an air cavity with a narrow neck resonates vigorously at a specific tuned frequency, dissipating excess bass energy."
+    },
+    {
+      "id": "pack-stem-ls-cr-01",
+      "section": "listening",
+      "taskType": "listen-choose-response",
+      "difficulty": "Intermediate",
+      "topic": "Chemistry Lab",
+      "learningObjective": "Respond properly to a lab partner’s observation about reagent temperature.",
+      "skillFocus": "Pragmatic Technical Response",
+      "estimatedTimeSec": 35,
+      "keywords": ["titration", "ice bath", "exothermic"],
+      "cefr": "B2",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.15,
+      "audioId": "aud-pack-stem-cr-01",
+      "title": "Controlling Reaction Temperature",
+      "contextLabel": "You will hear your lab partner speaking during an organic synthesis experiment.",
+      "script": [
+        {
+          "speaker": "Lab Partner",
+          "voiceRole": "student-female",
+          "text": "The flask temperature just jumped past thirty-five degrees even though we are only halfway through adding the catalyst."
+        }
+      ],
+      "question": "Choose the best response.",
+      "options": [
+        "Pause the dropwise addition right away and lower the flask deeper into the ice-water bath.",
+        "Yes, thirty-five degrees is unusually warm weather for October.",
+        "We already washed the graduated cylinders from yesterday’s titration.",
+        "Our lab report is due online before Friday at five."
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Identify the safe laboratory response to an unexpected temperature spike.",
+      "explanation": "Option A directly addresses the exothermic temperature rise by pausing addition and cooling the flask."
+    },
+    {
+      "id": "pack-stem-ls-cr-02",
+      "section": "listening",
+      "taskType": "listen-choose-response",
+      "difficulty": "Beginner",
+      "topic": "Engineering Workshop",
+      "learningObjective": "Give a practical answer about CAD software access.",
+      "skillFocus": "Pragmatic Response",
+      "estimatedTimeSec": 35,
+      "keywords": ["CAD", "workstation", "engineering"],
+      "cefr": "B1",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.0,
+      "audioId": "aud-pack-stem-cr-02",
+      "title": "Finding CAD Workstations",
+      "contextLabel": "You will hear a classmate asking about campus computer labs.",
+      "script": [
+        {
+          "speaker": "Classmate",
+          "voiceRole": "student-male",
+          "text": "Are the computers in the main library installed with SolidWorks, or do we have to go over to the Mechanical Engineering lab?"
+        }
+      ],
+      "question": "Choose the best response.",
+      "options": [
+        "Only the twenty-four workstations in Mechanical Engineering Room 118 have the full license.",
+        "I finished sketching my bridge truss on graph paper last night.",
+        "The library cafe serves espresso until nine in the evening.",
+        "Mechanical Engineering is located beside the botanical garden."
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Answer where SolidWorks is installed.",
+      "explanation": "Option A directly tells the classmate which lab hosts the licensed CAD software."
+    },
+    {
+      "id": "pack-stem-ls-cv-01",
+      "section": "listening",
+      "taskType": "listen-conversation",
+      "difficulty": "Advanced",
+      "topic": "Environmental Sensor Network",
+      "learningObjective": "Track how two field researchers troubleshoot faulty soil-moisture readings.",
+      "skillFocus": "Diagnostic Reasoning",
+      "estimatedTimeSec": 70,
+      "keywords": ["sensors", "soil moisture", "salinity", "calibration"],
+      "cefr": "C1",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.3,
+      "audioId": "aud-pack-stem-cv-01",
+      "title": "Troubleshooting Coastal Soil Sensors",
+      "contextLabel": "Listen to two environmental engineering students reviewing field-station telemetry.",
+      "script": [
+        { "speaker": "Student A", "voiceRole": "student-male", "text": "Station Four keeps reporting 95 percent soil moisture even after ten straight rainless days, while Station Three a hundred meters uphill reads 28 percent." },
+        { "speaker": "Student B", "voiceRole": "student-female", "text": "Wait—Station Four is right next to the tidal marsh edge. Our capacitance probes measure electrical conductivity, so salty brackish groundwater from king tides fools the sensor into thinking the soil is completely soaked." },
+        { "speaker": "Student A", "voiceRole": "student-male", "text": "Oh, of course! Should we scrap Station Four’s readings from our summer report?" },
+        { "speaker": "Student B", "voiceRole": "student-female", "text": "No need—let’s take three gravimetric oven-dried soil cores tomorrow morning to build a site-specific salinity correction curve for Station Four." }
+      ],
+      "question": "Why did Station Four report artificially high soil-moisture readings?",
+      "options": [
+        "Heavy localized rainfall fell only at the lower marsh edge.",
+        "Brackish salty groundwater raised electrical conductivity, skewing the capacitance probe.",
+        "Station Four’s wireless battery ran low after ten days.",
+        "An oven-drying error altered the software baseline."
+      ],
+      "correctAnswerIndex": 1,
+      "hint": "Listen to Student B’s explanation about capacitance probes and tidal salt.",
+      "explanation": "Salty brackish groundwater alters electrical conductivity, making capacitance probes over-report moisture."
+    },
+    {
+      "id": "pack-stem-ls-an-01",
+      "section": "listening",
+      "taskType": "listen-announcement",
+      "difficulty": "Intermediate",
+      "topic": "Observatory Open Night",
+      "learningObjective": "Recall weather-contingency rules from a rooftop observatory announcement.",
+      "skillFocus": "Contingency Detail",
+      "estimatedTimeSec": 60,
+      "keywords": ["observatory", "telescope", "planetarium", "clouds"],
+      "cefr": "B2",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.15,
+      "audioId": "aud-pack-stem-an-01",
+      "title": "Physics Rooftop Observatory Public Viewing",
+      "contextLabel": "Listen to an announcement from the Astronomy Club.",
+      "script": [
+        {
+          "speaker": "Club Officer",
+          "voiceRole": "announcer",
+          "text": "The Astronomy Club invites all students to our rooftop telescope viewing this Friday from 8:00 PM to 10:30 PM atop Faraday Hall. We will focus the 16-inch refractor on Saturn’s rings and the Orion Nebula. Please dress warmly and avoid using bright white phone screens on the observation deck so everyone preserves night vision. If cloud cover exceeds sixty percent at 7:00 PM, we will shift indoors to the third-floor planetarium for a live constellation show."
+        }
+      ],
+      "question": "What happens if the sky is heavily overcast at 7:00 PM on Friday?",
+      "options": [
+        "The viewing is postponed until Saturday night.",
+        "Visitors will attend an indoor constellation show in the third-floor planetarium instead.",
+        "Attendees will use red-filtered phone screens to view recorded nebula footage.",
+        "Only physics majors will be admitted to the roof."
+      ],
+      "correctAnswerIndex": 1,
+      "hint": "Listen to the final sentence of the announcement.",
+      "explanation": "If cloud cover exceeds 60% at 7:00 PM, the event shifts indoors to the third-floor planetarium."
+    },
+    {
+      "id": "pack-stem-ls-at-01",
+      "section": "listening",
+      "taskType": "listen-academic-talk",
+      "difficulty": "Advanced",
+      "topic": "Biomimicry Engineering",
+      "learningObjective": "Explain how kingfisher beak geometry inspired quieter high-speed train noses.",
+      "skillFocus": "Engineering Analogy",
+      "estimatedTimeSec": 85,
+      "keywords": ["Shinkansen", "kingfisher", "tunnel boom", "biomimicry"],
+      "cefr": "C1",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.35,
+      "audioId": "aud-pack-stem-at-01",
+      "title": "From Diving Birds to Bullet Trains: Aerodynamic Biomimicry",
+      "contextLabel": "Listen to part of a mechanical engineering lecture.",
+      "script": [
+        {
+          "speaker": "Professor",
+          "voiceRole": "male-academic",
+          "text": "When Japan’s 500-Series Shinkansen bullet trains first approached 300 kilometers per hour in the 1990s, engineers hit an unexpected acoustic wall. Every time a blunt-nosed train plunged into a narrow mountain tunnel, it compressed a piston-like wave of air ahead of it that burst out the far portal with a thunderous sonic boom audible hundreds of meters away—violating strict residential noise limits. Lead engineer Eiji Nakatsu, an avid birdwatcher, wondered how kingfishers dive from low-density air straight into dense water at high speed with almost zero splash. Measuring museum specimens revealed a sleek, wedge-like beak cross-section that parts fluid smoothly rather than pushing it forward. Redesigning the locomotive’s nose into a fifteen-meter kingfisher profile eliminated the tunnel boom, cut aerodynamic drag by thirty percent, and trimmed electricity use by fifteen percent."
+        }
+      ],
+      "question": "What problem did reshaping the Shinkansen nose like a kingfisher’s beak originally aim to solve?",
+      "options": [
+        "Preventing rainwater from splashing onto the windshield at high speed",
+        "Eliminating loud compressed-air booms when high-speed trains exited narrow tunnels",
+        "Increasing the passenger seating capacity of the front railcar",
+        "Allowing trains to brake more sharply on steep mountain grades"
+      ],
+      "correctAnswerIndex": 1,
+      "hint": "Listen to the engineering obstacle introduced in sentences two and three.",
+      "explanation": "Blunt train noses pushed compressed air through tunnels, causing sonic booms that violated residential noise limits."
+    },
+    {
+      "id": "pack-stem-ls-at-02",
+      "section": "listening",
+      "taskType": "listen-academic-talk",
+      "difficulty": "Intermediate",
+      "topic": "Microbiology",
+      "learningObjective": "Understand how quorum sensing coordinates collective bacterial behavior.",
+      "skillFocus": "Biological Signaling",
+      "estimatedTimeSec": 80,
+      "keywords": ["quorum sensing", "bioluminescence", "bacteria", "threshold"],
+      "cefr": "B2+",
+      "sourceType": "imported",
+      "reviewStatus": "verified",
+      "scoreWeight": 1.25,
+      "audioId": "aud-pack-stem-at-02",
+      "title": "Chemical Voting: Bacterial Quorum Sensing",
+      "contextLabel": "Listen to part of a microbiology lecture.",
+      "script": [
+        {
+          "speaker": "Professor",
+          "voiceRole": "female-academic",
+          "text": "Single-celled bacteria were long assumed to act as solitary, uncoordinated organisms. Yet marine microbiologists studying the Hawaiian bobtail squid noticed something remarkable: luminescent Vibrio bacteria living inside the squid’s light organ stay completely dark when sparse, then suddenly switch on their blue glow in unison once their population reaches a critical density. How do blind microbes count their neighbors? Each cell continuously secretes tiny signaling molecules called autoinducers into its surroundings. When cells are scattered, those molecules simply drift away. Once crowded inside the squid’s light organ, autoinducer concentration crosses a threshold, binding to receptors on every bacterium simultaneously and activating light-producing genes—a coordinated chemical census biologists call quorum sensing."
+        }
+      ],
+      "question": "How do Vibrio bacteria determine when to switch on their bioluminescent glow?",
+      "options": [
+        "They detect moonlight entering the squid’s light organ at midnight.",
+        "They sense when secreted signaling molecules exceed a concentration threshold indicating high cell density.",
+        "They receive electrical nerve impulses directly from the squid’s brain.",
+        "They glow continuously from birth until nutrients run out."
+      ],
+      "correctAnswerIndex": 1,
+      "hint": "Listen to the role of autoinducers and concentration thresholds.",
+      "explanation": "Cells secrete autoinducer molecules; when population density is high enough, concentration crosses a threshold and switches on light genes simultaneously."
+    }
+  ],
+  "vocabulary": [
+    { "id": "v-stem-01", "word": "Depolymerization", "phonetic": "/diːˌpɒl.ɪ.mə.raɪˈzeɪ.ʃən/", "partOfSpeech": "noun", "definition": "The chemical process of breaking long polymer chains back into constituent monomers.", "example": "Enzymatic depolymerization recovers pure resin without harsh toxic solvents.", "synonyms": ["breakdown", "deconstruction", "cleavage"], "antonyms": ["polymerization", "synthesis"], "topic": "Biotechnology", "cefr": "C2", "difficulty": "Expert" },
+    { "id": "v-stem-02", "word": "Stratigraphy", "phonetic": "/strəˈtɪɡ.rə.fi/", "partOfSpeech": "noun", "definition": "The geological study of layered rock formations and their chronological sequence.", "example": "Rover images of Jezero delta stratigraphy reveal alternating tranquil and flood eras.", "synonyms": ["layer analysis", "bedding sequence", "geological layering"], "antonyms": ["homogeneity"], "topic": "Planetary Geology", "cefr": "C2", "difficulty": "Expert" },
+    { "id": "v-stem-03", "word": "Conglomerate", "phonetic": "/kənˈɡlɒm.ər.ət/", "partOfSpeech": "noun", "definition": "A coarse sedimentary rock composed of rounded pebbles or boulders cemented together.", "example": "Boulder conglomerates atop fine mudstone point to sudden flash floods.", "synonyms": ["aggregate", "breccia", "composite"], "antonyms": ["monolith", "silt"], "topic": "Geology", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-04", "word": "Dissipate", "phonetic": "/ˈdɪs.ɪ.peɪt/", "partOfSpeech": "verb", "definition": "To scatter, disperse, or gradually convert concentrated energy into harmless heat.", "example": "Slotted resonators dissipate excess low-frequency bass energy through viscous friction.", "synonyms": ["disperse", "diffuse", "scatter"], "antonyms": ["concentrate", "accumulate"], "topic": "Physics", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-05", "word": "Oscillate", "phonetic": "/ˈɒs.ɪ.leɪt/", "partOfSpeech": "verb", "definition": "To swing or vibrate repeatedly back and forth around an equilibrium position.", "example": "Tuned sound waves cause air inside the narrow wall slot to oscillate vigorously.", "synonyms": ["vibrate", "fluctuate", "undulate"], "antonyms": ["stabilize", "rest"], "topic": "Acoustics", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-06", "word": "Viscous", "phonetic": "/ˈvɪs.kəs/", "partOfSpeech": "adjective", "definition": "Having internal fluid resistance to smooth flow or shear motion.", "example": "Viscous air friction inside narrow timber slots dampens booming room echo.", "synonyms": ["thick", "resistive", "syrupy"], "antonyms": ["fluid", "frictionless"], "topic": "Fluid Mechanics", "cefr": "C2", "difficulty": "Expert" },
+    { "id": "v-stem-07", "word": "Biomimicry", "phonetic": "/ˌbaɪ.oʊˈmɪm.ɪ.kri/", "partOfSpeech": "noun", "definition": "Designing engineering systems inspired by time-tested structures and strategies in nature.", "example": "Reshaping bullet-train noses after kingfisher beaks is a classic triumph of biomimicry.", "synonyms": ["bio-inspired design", "bionics", "nature emulation"], "antonyms": ["arbitrary design"], "topic": "Engineering", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-08", "word": "Bioluminescence", "phonetic": "/ˌbaɪ.oʊˌluː.mɪˈnes.əns/", "partOfSpeech": "noun", "definition": "The biochemical emission of visible light by living organisms.", "example": "Symbiotic marine bacteria use bioluminescence to camouflage bobtail squid at night.", "synonyms": ["biological glow", "chemiluminescence", "radiance"], "antonyms": ["darkness"], "topic": "Marine Biology", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-09", "word": "Threshold", "phonetic": "/ˈθreʃ.hoʊld/", "partOfSpeech": "noun", "definition": "The minimum level or intensity required to trigger a measurable response or state change.", "example": "Quorum sensing activates once signaling molecules cross a density threshold.", "synonyms": ["tipping point", "limit", "cutoff"], "antonyms": ["baseline"], "topic": "Science & Systems", "cefr": "B2+", "difficulty": "Intermediate" },
+    { "id": "v-stem-10", "word": "Telemetry", "phonetic": "/təˈlem.ə.tri/", "partOfSpeech": "noun", "definition": "Automated measurement and wireless transmission of data from remote sensors.", "example": "Solar-car telemetry revealed overheating inside rear battery zone three.", "synonyms": ["remote sensing", "live logging", "instrumentation"], "antonyms": ["manual inspection"], "topic": "Engineering", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-11", "word": "Brackish", "phonetic": "/ˈbræk.ɪʃ/", "partOfSpeech": "adjective", "definition": "Slightly salty, as results from freshwater mixing with seawater in estuaries.", "example": "Brackish marsh groundwater skewed the station’s electrical moisture probes.", "synonyms": ["saline", "estuarine", "briny"], "antonyms": ["fresh", "potable"], "topic": "Hydrology", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-12", "word": "Exothermic", "phonetic": "/ˌek.soʊˈθɜːr.mɪk/", "partOfSpeech": "adjective", "definition": "Accompanied by the release of heat energy into the surrounding environment.", "example": "Pause catalyst addition immediately if an exothermic reaction heats above target limits.", "synonyms": ["heat-releasing", "warming", "thermic"], "antonyms": ["endothermic", "heat-absorbing"], "topic": "Chemistry", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-13", "word": "Reagent", "phonetic": "/riˈeɪ.dʒənt/", "partOfSpeech": "noun", "definition": "A chemical substance or compound added to a system to cause or test a specific reaction.", "example": "Store volatile organic reagents in ventilated cabinets rather than inside active fume hoods.", "synonyms": ["reactant", "chemical agent", "testing compound"], "antonyms": ["inert medium"], "topic": "Chemistry", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-14", "word": "Checkpoint", "phonetic": "/ˈtʃek.pɔɪnt/", "partOfSpeech": "noun", "definition": "A saved intermediate state allowing a long computation to resume safely if interrupted.", "example": "Cluster batch jobs must write a checkpoint every two hours.", "synonyms": ["snapshot", "savepoint", "milestone"], "antonyms": ["restart"], "topic": "Computing", "cefr": "B2", "difficulty": "Intermediate" },
+    { "id": "v-stem-15", "word": "Decelerate", "phonetic": "/diːˈsel.ə.reɪt/", "partOfSpeech": "verb", "definition": "To reduce speed or slow down gradually.", "example": "Deltas form where sediment-laden rivers decelerate upon entering standing lakes.", "synonyms": ["slow down", "brake", "slacken"], "antonyms": ["accelerate", "speed up"], "topic": "Physics & Geology", "cefr": "B2", "difficulty": "Intermediate" },
+    { "id": "v-stem-16", "word": "Aerodynamic", "phonetic": "/ˌer.oʊ.daɪˈnæm.ɪk/", "partOfSpeech": "adjective", "definition": "Shaped to move smoothly through air with minimal resistance or turbulence.", "example": "The elongated locomotive profile cut aerodynamic drag by thirty percent.", "synonyms": ["streamlined", "sleek", "low-drag"], "antonyms": ["blunt", "boxy"], "topic": "Engineering", "cefr": "B2+", "difficulty": "Intermediate" },
+    { "id": "v-stem-17", "word": "Porous", "phonetic": "/ˈpɔːr.əs/", "partOfSpeech": "adjective", "definition": "Containing minute spaces or pores through which air or liquid may pass.", "example": "Porous fiberglass panels absorb high-pitched sound waves effectively.", "synonyms": ["permeable", "absorbent", "spongy"], "antonyms": ["impermeable", "solid"], "topic": "Materials Science", "cefr": "B2+", "difficulty": "Intermediate" },
+    { "id": "v-stem-18", "word": "Secrete", "phonetic": "/sɪˈkriːt/", "partOfSpeech": "verb", "definition": "To produce and release a biochemical substance from a cell or gland.", "example": "Each Vibrio bacterium secretes signaling molecules to detect nearby peers.", "synonyms": ["release", "emit", "exude"], "antonyms": ["absorb", "retain"], "topic": "Microbiology", "cefr": "C1", "difficulty": "Advanced" },
+    { "id": "v-stem-19", "word": "Sparse", "phonetic": "/spɑːrs/", "partOfSpeech": "adjective", "definition": "Thinly dispersed or scattered rather than densely packed.", "example": "When bacterial populations remain sparse, signaling molecules drift away harmlessly.", "synonyms": ["scattered", "thin", "scant"], "antonyms": ["dense", "abundant"], "topic": "Ecology", "cefr": "B2+", "difficulty": "Intermediate" },
+    { "id": "v-stem-20", "word": "Conductivity", "phonetic": "/ˌkɒn.dʌkˈtɪv.ə.ti/", "partOfSpeech": "noun", "definition": "The degree to which a specified material transmits electricity or heat.", "example": "Dissolved salts elevate groundwater conductivity near tidal wetlands.", "synonyms": ["transmission capacity", "conductance"], "antonyms": ["insulation", "resistance"], "topic": "Physics", "cefr": "C1", "difficulty": "Advanced" }
+  ]
+}
